@@ -18,9 +18,47 @@ class User extends BaseUser
      */
     protected $id;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="IntranetBundle\Entity\Subject", cascade={"persist"})
+     */
+    private $subjects;
+
     public function __construct()
     {
         parent::__construct();
-        // your own logic
+    }
+
+    /**
+     * Add subject
+     *
+     * @param \IntranetBundle\Entity\Subject $subject
+     *
+     * @return User
+     */
+    public function addSubject(\IntranetBundle\Entity\Subject $subject)
+    {
+        $this->subjects[] = $subject;
+
+        return $this;
+    }
+
+    /**
+     * Remove subject
+     *
+     * @param \IntranetBundle\Entity\Subject $subject
+     */
+    public function removeSubject(\IntranetBundle\Entity\Subject $subject)
+    {
+        $this->subjects->removeElement($subject);
+    }
+
+    /**
+     * Get subjects
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getSubjects()
+    {
+        return $this->subjects;
     }
 }

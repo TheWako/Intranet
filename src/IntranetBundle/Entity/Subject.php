@@ -28,7 +28,6 @@ class Subject
      */
     private $name;
 
-
     /**
      * Get id
      *
@@ -63,4 +62,3 @@ class Subject
         return $this->name;
     }
 }
-

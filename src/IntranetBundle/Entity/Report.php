@@ -24,10 +24,19 @@ class Report
     /**
      * @var float
      *
-     * @ORM\Column(name="Grade", type="float")
+     * @ORM\Column(name="grade", type="float")
      */
     private $grade;
 
+    /**
+     * @ORM\OneToOne(targetEntity="IntranetBundle\Entity\User", cascade={"persist"})
+     */
+    private $user;
+
+    /**
+     * @ORM\OneToOne(targetEntity="IntranetBundle\Entity\Subject", cascade={"persist"})
+     */
+    private $subject;
 
     /**
      * Get id
@@ -62,5 +71,52 @@ class Report
     {
         return $this->grade;
     }
-}
 
+    /**
+     * Set user
+     *
+     * @param \IntranetBundle\Entity\User $user
+     *
+     * @return Report
+     */
+    public function setUser(\IntranetBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \IntranetBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * Set subject
+     *
+     * @param \IntranetBundle\Entity\Subject $subject
+     *
+     * @return Report
+     */
+    public function setSubject(\IntranetBundle\Entity\Subject $subject = null)
+    {
+        $this->subject = $subject;
+
+        return $this;
+    }
+
+    /**
+     * Get subject
+     *
+     * @return \IntranetBundle\Entity\Subject
+     */
+    public function getSubject()
+    {
+        return $this->subject;
+    }
+}
