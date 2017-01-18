@@ -30,11 +30,13 @@ class Report
 
     /**
      * @ORM\OneToOne(targetEntity="IntranetBundle\Entity\User", cascade={"persist"})
+     * @ORM\JoinColumn(nullable=false)
      */
     private $user;
 
     /**
      * @ORM\OneToOne(targetEntity="IntranetBundle\Entity\Subject", cascade={"persist"})
+     * @ORM\JoinColumn(nullable=false)
      */
     private $subject;
 
@@ -79,7 +81,7 @@ class Report
      *
      * @return Report
      */
-    public function setUser(\IntranetBundle\Entity\User $user = null)
+    public function setUser(\IntranetBundle\Entity\User $user)
     {
         $this->user = $user;
 
@@ -103,7 +105,7 @@ class Report
      *
      * @return Report
      */
-    public function setSubject(\IntranetBundle\Entity\Subject $subject = null)
+    public function setSubject(\IntranetBundle\Entity\Subject $subject)
     {
         $this->subject = $subject;
 
