@@ -29,13 +29,13 @@ class Report
     private $grade;
 
     /**
-     * @ORM\OneToOne(targetEntity="IntranetBundle\Entity\User", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="IntranetBundle\Entity\User")
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
 
     /**
-     * @ORM\OneToOne(targetEntity="IntranetBundle\Entity\Subject", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="IntranetBundle\Entity\Subject")
      * @ORM\JoinColumn(nullable=false)
      */
     private $subject;
