@@ -1,0 +1,55 @@
+{% extends "::base.html.twig" %}
+
+{% set userId = '' %}
+{% for user in user %}
+    {% set userId = user.firstname ~ ' ' ~ user.lastname %}
+{% endfor %}
+
+{% block title %}{{'Profil Elève - ' ~ userId}}{% endblock %}
+
+{% block body %}
+    <h1>{{ userId }}</h1>       
+        <table>
+        <thead>
+            <tr>
+                <th>Matière</th>
+                <th>Note</th>
+                <th>Moyenne</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for subject in subjects %}
+            {% set gradeTab = [] %}
+            <tr>
+                <td>
+                    <ul>
+                        <li>{{ subject.name }}</li>
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        {% for user in user %}
+                            {% if user.subject_id == subject.subject_id %}
+                                <li>{{ user.Grade }}</li>
+                                {% set gradeTab = gradeTab|merge([user.Grade]) %}
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </td>
+                <td>
+                    {% if gradeTab %}
+                        {% set average = 0 %}
+
+                        {% for grade in gradeTab %}
+                        
+                            {% set average = average + grade %}
+                        {% endfor %}
+                        {% set average = average / gradeTab|length %}
+                        {{ average }}
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

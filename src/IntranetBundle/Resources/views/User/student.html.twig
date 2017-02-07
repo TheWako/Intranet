@@ -3,36 +3,33 @@
 {% block title %}Liste des élèves{% endblock %}
 
 {% block body %}
-
-{% set userId = 0 %}
-{% set userTab = [] %}
-{% set subjectTab = [] %}
-{% for i in 0..users|length-1 %}
-    {% if userId != users[i].user_id %}
-        {% set userId = users[i].user_id %}
-        {% set userTab = userTab|merge([users[i]]) %}
-    {% endif %}
-    {% set subjectTab = subjectTab|merge([ users[i] ]) %}
-{% endfor%}
-
     <h1>Liste des élèves</h1>
     <table>
         <thead>
             <tr>
                 <th>Elève</th>
                 <th>Matiere</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
-        {% for i in 0..userTab|length-1 %}
+        {% for i in 0..users|length-1 %}
                 <tr>
-                    <td>{{ userTab[i].firstname }} {{ userTab[i].lastname }}</td>
+                    <td>{{ users[i].firstname }} {{ users[i].lastname }}</td>
                     <td>
-                        {% for j in 0..subjectTab|length-1 %}
-                            {% if subjectTab[j].user_id == userTab[i].user_id %}
-                                {{ subjectTab[j].name }}<br>
-                            {% endif %}
-                        {% endfor %}
+                        <ul>
+                            {% for j in 0..subjects|length-1 %}
+                                {% if subjects[j].user_id == users[i].id %}
+                                    <li>{{ subjects[j].name }}</li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                    </td>
+                    <td>
+                        <ul>
+                            <li><a href="{{ path('student_id_show', { 'id' : users[i].id }) }}">Voir</a></li>
+                            <li><a href="{{ path('student_edit', { 'id' : users[i].id }) }}">Modifier</a></li>
+                        </ul>
                     </td>
                 </tr>
         {% endfor %}

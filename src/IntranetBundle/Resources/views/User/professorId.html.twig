@@ -1,0 +1,24 @@
+{% extends "::base.html.twig" %}
+{% set userId = '' %}
+{% for user in user %}
+    {% set userId = user.firstname ~ ' ' ~ user.lastname %}
+{% endfor %}
+{% block title %}{{'Profil Professeur - ' ~ userId}}{% endblock %}
+{% block body %}
+
+    <h1>{{ userId }}</h1>       
+        <table>
+        <thead>
+            <tr>
+                <th>Matière</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for subject in subjects %}
+            <tr>
+                <td>{{ subject.name }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

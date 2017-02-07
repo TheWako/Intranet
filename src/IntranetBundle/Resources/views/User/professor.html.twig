@@ -1,0 +1,39 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}Liste des professeurs{% endblock %}
+
+{% block body %}
+    <h1>Liste des professeurs</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Professeur</th>
+                <th>Matiere</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for i in 0..users|length-1 %}
+                <tr>
+                    <td>{{ users[i].firstname }} {{ users[i].lastname }}</td>
+                    <td>
+                        <ul>
+                            {% for j in 0..subjects|length-1 %}
+                                {% if subjects[j].user_id == users[i].id %}
+                                    <li>{{ subjects[j].name }}</li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                    </td>
+                    <td>
+                        <ul>
+                            <li><a href="{{ path('professor_id_show', { 'id' : users[i].id }) }}">Voir</a></li>
+                            <li><a href="{{ path('professor_edit', { 'id' : users[i].id }) }}">Modifier</a></li>
+                        </ul>
+                    </td>
+                </tr>
+        {% endfor %}
+
+        </tbody>
+    </table>
+{% endblock %}

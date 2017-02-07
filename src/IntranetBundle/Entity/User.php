@@ -72,6 +72,11 @@ class User extends BaseUser
      */
     private $subjects;
 
+    /**
+     * @ORM\OneToMany(targetEntity="IntranetBundle\Entity\Report", mappedBy="user", cascade={"persist"})
+     */
+    private $reports;
+
     public function __construct()
     {
         parent::__construct();
@@ -277,5 +282,39 @@ class User extends BaseUser
     public function getPhoneNumber()
     {
         return $this->phoneNumber;
+    }
+
+    /**
+     * Add report
+     *
+     * @param \IntranetBundle\Entity\Report $report
+     *
+     * @return User
+     */
+    public function addReport(\IntranetBundle\Entity\Report $report)
+    {
+        $this->reports[] = $report;
+
+        return $this;
+    }
+
+    /**
+     * Remove report
+     *
+     * @param \IntranetBundle\Entity\Report $report
+     */
+    public function removeReport(\IntranetBundle\Entity\Report $report)
+    {
+        $this->reports->removeElement($report);
+    }
+
+    /**
+     * Get reports
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getReports()
+    {
+        return $this->reports;
     }
 }

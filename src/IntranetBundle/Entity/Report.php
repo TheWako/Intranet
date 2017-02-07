@@ -29,10 +29,13 @@ class Report
     private $grade;
 
     /**
-     * @ORM\ManyToOne(targetEntity="IntranetBundle\Entity\User")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\ManyToOne(
+     *      targetEntity="IntranetBundle\Entity\User",
+     *      inversedBy="reports"
+     * )
+     * @ORM\JoinColumn(onDelete="CASCADE")
      */
-    private $user;
+    protected $user;
 
     /**
      * @ORM\ManyToOne(targetEntity="IntranetBundle\Entity\Subject")
